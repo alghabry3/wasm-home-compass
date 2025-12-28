@@ -1,14 +1,25 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const navItems = [
   { label: "الرئيسية", href: "/" },
   { label: "المشاريع", href: "/projects" },
   { label: "اختر لك عقارك", href: "/smart-advisor" },
-  { label: "الاستثمار العقاري", href: "/investment" },
+  { 
+    label: "الخدمات", 
+    href: "#",
+    submenu: [
+      { label: "الحلول التمويلية", href: "/financing-solutions" },
+      { label: "القروض العقارية", href: "/mortgage-loans" },
+      { label: "الرهن العقاري", href: "/mortgage" },
+      { label: "حلول التعثر", href: "/default-solutions" },
+      { label: "الدعم السكني", href: "/housing-support" },
+    ]
+  },
+  { label: "الاستثمار", href: "/investment" },
   { label: "المدونة", href: "/blog" },
   { label: "من نحن", href: "/about" },
   { label: "تواصل معنا", href: "/contact" },
@@ -16,6 +27,7 @@ const navItems = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const location = useLocation();
 
   return (
@@ -28,27 +40,52 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={`animated-underline text-sm font-medium transition-colors hover:text-accent ${
-                  location.pathname === item.href
-                    ? "text-accent"
-                    : "text-foreground"
-                }`}
-              >
-                {item.label}
-              </Link>
+              <div key={item.href + item.label} className="relative group">
+                {item.submenu ? (
+                  <>
+                    <button
+                      className="flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent text-foreground py-2"
+                    >
+                      {item.label}
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
+                    <div className="absolute top-full right-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                      <div className="bg-card rounded-xl shadow-lg border border-border p-2 min-w-[200px]">
+                        {item.submenu.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            to={sub.href}
+                            className="block px-4 py-2 text-sm text-foreground hover:bg-accent/10 hover:text-accent rounded-lg transition-colors"
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className={`animated-underline text-sm font-medium transition-colors hover:text-accent ${
+                      location.pathname === item.href ? "text-accent" : "text-foreground"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </div>
             ))}
           </nav>
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <Button variant="gold" size="lg" className="gap-2">
-              <Phone className="h-4 w-4" />
-              تحدث مع مستشار
+            <Button variant="gold" size="lg" className="gap-2" asChild>
+              <a href="https://wa.me/966920017195" target="_blank" rel="noopener noreferrer">
+                <Phone className="h-4 w-4" />
+                تحدث مع مستشار
+              </a>
             </Button>
           </div>
 
@@ -67,22 +104,51 @@ const Header = () => {
           <nav className="lg:hidden py-4 border-t border-border/50 animate-fade-up">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`py-3 px-4 rounded-lg text-sm font-medium transition-colors ${
-                    location.pathname === item.href
-                      ? "bg-accent/10 text-accent"
-                      : "text-foreground hover:bg-secondary"
-                  }`}
-                >
-                  {item.label}
-                </Link>
+                <div key={item.href + item.label}>
+                  {item.submenu ? (
+                    <>
+                      <button
+                        onClick={() => setOpenSubmenu(openSubmenu === item.label ? null : item.label)}
+                        className="w-full flex items-center justify-between py-3 px-4 text-sm font-medium text-foreground"
+                      >
+                        {item.label}
+                        <ChevronDown className={`h-4 w-4 transition-transform ${openSubmenu === item.label ? "rotate-180" : ""}`} />
+                      </button>
+                      {openSubmenu === item.label && (
+                        <div className="pr-4 space-y-1">
+                          {item.submenu.map((sub) => (
+                            <Link
+                              key={sub.href}
+                              to={sub.href}
+                              onClick={() => setIsMenuOpen(false)}
+                              className="block py-2 px-4 text-sm text-muted-foreground hover:text-accent"
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`py-3 px-4 rounded-lg text-sm font-medium transition-colors ${
+                        location.pathname === item.href
+                          ? "bg-accent/10 text-accent"
+                          : "text-foreground hover:bg-secondary"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </div>
               ))}
-              <Button variant="gold" size="lg" className="mt-4 gap-2">
-                <Phone className="h-4 w-4" />
-                تحدث مع مستشار
+              <Button variant="gold" size="lg" className="mt-4 gap-2" asChild>
+                <a href="https://wa.me/966920017195" target="_blank" rel="noopener noreferrer">
+                  <Phone className="h-4 w-4" />
+                  تحدث مع مستشار
+                </a>
               </Button>
             </div>
           </nav>

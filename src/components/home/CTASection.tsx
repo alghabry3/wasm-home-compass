@@ -1,9 +1,11 @@
+import React, { forwardRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const CTASection = () => {
+const CTASection = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
   return (
-    <section className="py-20 bg-secondary">
+    <section ref={ref} className="py-20 bg-secondary" {...props}>
       <div className="section-container">
         <div className="max-w-4xl mx-auto text-center bg-card rounded-3xl p-12 shadow-strong relative overflow-hidden">
           {/* Decorative Elements */}
@@ -19,13 +21,17 @@ const CTASection = () => {
               تحدث مع مستشارينا الآن واحصل على استشارة مجانية تساعدك في اتخاذ القرار الصحيح
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="gold" size="xl" className="w-full sm:w-auto gap-2">
-                <Phone className="h-5 w-5" />
-                احصل على استشارة مجانية
+              <Button variant="gold" size="xl" className="w-full sm:w-auto gap-2" asChild>
+                <a href="https://wa.me/966920017195" target="_blank" rel="noopener noreferrer">
+                  <Phone className="h-5 w-5" />
+                  احصل على استشارة مجانية
+                </a>
               </Button>
-              <Button variant="outline" size="xl" className="w-full sm:w-auto gap-2">
-                تصفح المشاريع
-                <ArrowLeft className="h-5 w-5" />
+              <Button variant="outline" size="xl" className="w-full sm:w-auto gap-2" asChild>
+                <Link to="/projects">
+                  تصفح المشاريع
+                  <ArrowLeft className="h-5 w-5" />
+                </Link>
               </Button>
             </div>
           </div>
@@ -33,6 +39,8 @@ const CTASection = () => {
       </div>
     </section>
   );
-};
+});
+
+CTASection.displayName = "CTASection";
 
 export default CTASection;

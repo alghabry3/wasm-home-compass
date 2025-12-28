@@ -1,10 +1,11 @@
+import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import logo from "@/assets/logo.png";
 
-const Footer = () => {
+const Footer = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer ref={ref} className="bg-primary text-primary-foreground" {...props}>
       <div className="section-container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
@@ -55,12 +56,23 @@ const Footer = () => {
           {/* Services */}
           <div>
             <h3 className="text-lg font-bold mb-6">خدماتنا</h3>
-            <ul className="space-y-3 text-sm text-primary-foreground/80">
-              <li>استشارات عقارية مجانية</li>
-              <li>تمويل عقاري</li>
-              <li>تقييم العقارات</li>
-              <li>إدارة الأملاك</li>
-              <li>الاستثمار العقاري</li>
+            <ul className="space-y-3 text-sm">
+              {[
+                { label: "التمويل العقاري", href: "/financing-solutions" },
+                { label: "القروض العقارية", href: "/mortgage-loans" },
+                { label: "الرهن العقاري", href: "/mortgage" },
+                { label: "حلول التعثر", href: "/default-solutions" },
+                { label: "الدعم السكني", href: "/housing-support" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    className="text-primary-foreground/80 hover:text-accent transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -80,7 +92,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3 text-sm text-primary-foreground/80">
                 <MapPin className="h-5 w-5 text-accent flex-shrink-0" />
-                <span>الخبر، شارع الإمام تركي</span>
+                <span>الخبر، شارع الأمير تركي</span>
               </li>
             </ul>
           </div>
@@ -98,11 +110,16 @@ const Footer = () => {
             <Link to="/terms" className="hover:text-accent transition-colors">
               الشروط والأحكام
             </Link>
+            <Link to="/faq" className="hover:text-accent transition-colors">
+              الأسئلة الشائعة
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 export default Footer;
