@@ -144,8 +144,8 @@ const FeaturedProjects = () => {
                       {project.price} <span className="text-sm">ر.س</span>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm">
-                    التفاصيل
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to={`/projects/${project.id}`}>التفاصيل</Link>
                   </Button>
                 </div>
               </div>

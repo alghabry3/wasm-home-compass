@@ -9,10 +9,12 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import Index from "./pages/Index";
 import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
+import PropertyDetails from "./pages/PropertyDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Investment from "./pages/Investment";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import SmartAdvisor from "./pages/SmartAdvisor";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -26,6 +28,12 @@ import UnderConstruction from "./pages/UnderConstruction";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminProjects from "./pages/admin/AdminProjects";
+import AdminUnits from "./pages/admin/AdminUnits";
+import AdminCustomers from "./pages/admin/AdminCustomers";
+import AdminLeads from "./pages/admin/AdminLeads";
+import AdminFinancing from "./pages/admin/AdminFinancing";
+import AdminSettings from "./pages/admin/AdminSettings";
 import OdooIntegration from "./pages/admin/OdooIntegration";
 
 const queryClient = new QueryClient();
@@ -42,11 +50,13 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:id" element={<ProjectDetails />} />
+              <Route path="/properties/:id" element={<PropertyDetails />} />
               <Route path="/under-construction" element={<UnderConstruction />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/investment" element={<Investment />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/smart-advisor" element={<SmartAdvisor />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
@@ -62,6 +72,36 @@ const App = () => (
               <Route path="/admin" element={
                 <ProtectedRoute requireAdmin>
                   <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/projects" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminProjects />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/units" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminUnits />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/customers" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminCustomers />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/leads" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminLeads />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/financing" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminFinancing />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/settings" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminSettings />
                 </ProtectedRoute>
               } />
               <Route path="/admin/odoo-integration" element={
