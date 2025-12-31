@@ -92,10 +92,10 @@ const menuItems = [
 
 interface AdminLayoutProps {
   children: React.ReactNode;
-  title: string;
+  title?: string;
 }
 
-const AdminLayout = ({ children, title }: AdminLayoutProps) => {
+const AdminLayout = ({ children, title = "لوحة التحكم" }: AdminLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
