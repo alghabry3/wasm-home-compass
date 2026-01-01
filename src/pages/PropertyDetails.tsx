@@ -53,6 +53,10 @@ const PropertyDetails = () => {
       <Helmet>
         <title>{property.name} | وسم هوم العقارية</title>
         <meta name="description" content={`${property.name} - ${property.category} في ${property.district}، ${property.city}. ${property.area} م² بسعر ${property.price} ريال.`} />
+        <link rel="canonical" href={`https://wasmhome.sa/properties/${id}`} />
+        <meta property="og:title" content={`${property.name} | وسم هوم العقارية`} />
+        <meta property="og:description" content={`${property.name} - ${property.category} في ${property.district}، ${property.city}.`} />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       <Header />

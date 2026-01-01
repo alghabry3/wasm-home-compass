@@ -75,6 +75,11 @@ const BlogPost = () => {
       <Helmet>
         <title>{post.title} | مدونة وسم هوم</title>
         <meta name="description" content={post.excerpt || post.title} />
+        <link rel="canonical" href={`https://wasmhome.sa/blog/${slug}`} />
+        <meta property="og:title" content={`${post.title} | مدونة وسم هوم`} />
+        <meta property="og:description" content={post.excerpt || post.title} />
+        <meta property="og:type" content="article" />
+        {post.featured_image && <meta property="og:image" content={post.featured_image} />}
       </Helmet>
 
       <Header />
