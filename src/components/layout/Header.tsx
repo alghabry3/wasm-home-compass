@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, ChevronDown, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import logo from "@/assets/logo.png";
-
 const navItems = [
   { label: "الرئيسية", href: "/" },
   { label: "المشاريع", href: "/projects" },
@@ -26,14 +25,15 @@ const navItems = [
   { label: "تواصل معنا", href: "/contact" },
 ];
 
-const Header = () => {
+const Header = forwardRef<HTMLElement>((_, ref) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const location = useLocation();
   const { user, isAdmin } = useAuth();
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 glass border-b border-border/50">
+    <header ref={ref} className="fixed top-0 right-0 left-0 z-50 glass border-b border-border/50">
+    
       <div className="section-container">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -198,6 +198,8 @@ const Header = () => {
       </div>
     </header>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;
