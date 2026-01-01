@@ -37,9 +37,12 @@ const Auth = lazy(() => import("./pages/Auth"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminProjects = lazy(() => import("./pages/admin/AdminProjects"));
 const AdminUnits = lazy(() => import("./pages/admin/AdminUnits"));
+const AdminProperties = lazy(() => import("./pages/admin/AdminProperties"));
 const AdminCustomers = lazy(() => import("./pages/admin/AdminCustomers"));
 const AdminLeads = lazy(() => import("./pages/admin/AdminLeads"));
 const AdminFinancing = lazy(() => import("./pages/admin/AdminFinancing"));
+const AdminDevelopers = lazy(() => import("./pages/admin/AdminDevelopers"));
+const AdminLocations = lazy(() => import("./pages/admin/AdminLocations"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 const OdooIntegration = lazy(() => import("./pages/admin/OdooIntegration"));
 const AdminBlog = lazy(() => import("./pages/admin/AdminBlog"));
@@ -104,6 +107,11 @@ const App = () => (
                     <AdminUnits />
                   </ProtectedRoute>
                 } />
+                <Route path="/admin/properties" element={
+                  <ProtectedRoute requireAdmin>
+                    <AdminProperties />
+                  </ProtectedRoute>
+                } />
                 <Route path="/admin/customers" element={
                   <ProtectedRoute requireAdmin>
                     <AdminCustomers />
@@ -122,6 +130,16 @@ const App = () => (
                 <Route path="/admin/settings" element={
                   <ProtectedRoute requireAdmin>
                     <AdminSettings />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/developers" element={
+                  <ProtectedRoute requireAdmin>
+                    <AdminDevelopers />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/locations" element={
+                  <ProtectedRoute requireAdmin>
+                    <AdminLocations />
                   </ProtectedRoute>
                 } />
                 <Route path="/admin/odoo-integration" element={
