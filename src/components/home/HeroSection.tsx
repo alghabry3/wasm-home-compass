@@ -1,11 +1,12 @@
+import React, { forwardRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const HeroSection = () => {
+const HeroSection = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>((props, ref) => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden" {...props}>
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -76,6 +77,8 @@ const HeroSection = () => {
       </div>
     </section>
   );
-};
+});
+
+HeroSection.displayName = "HeroSection";
 
 export default HeroSection;

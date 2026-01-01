@@ -17,7 +17,11 @@ const Index = () => {
           content="نساعدك تختار العقار المناسب لك بثقة. استشارة ذكية ومشاريع موثوقة وشفافية كاملة في الرياض وجدة والدمام."
         />
         <meta name="keywords" content="عقارات السعودية, شقق للبيع, فلل للبيع, استثمار عقاري, وسم هوم" />
-        <link rel="canonical" href="https://wasmhome.sa" />
+        <link rel="canonical" href="https://wasmhome.sa/" />
+        <meta property="og:title" content="وسم هوم العقارية | شريكك الموثوق في رحلة البحث عن العقار" />
+        <meta property="og:description" content="نساعدك تختار العقار المناسب لك بثقة. استشارة ذكية ومشاريع موثوقة وشفافية كاملة." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://wasmhome.sa/" />
       </Helmet>
 
       <Header />
