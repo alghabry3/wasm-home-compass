@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -7,9 +8,9 @@ import FeaturedProjects from "@/components/home/FeaturedProjects";
 import WhyUsSection from "@/components/home/WhyUsSection";
 import CTASection from "@/components/home/CTASection";
 
-const Index = () => {
+const Index = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <>
+    <div ref={ref}>
       <Helmet>
         <title>وسم هوم العقارية | شريكك الموثوق في رحلة البحث عن العقار</title>
         <meta
@@ -35,8 +36,10 @@ const Index = () => {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
-};
+});
+
+Index.displayName = 'Index';
 
 export default Index;
