@@ -35,6 +35,8 @@ import AdminLeads from "./pages/admin/AdminLeads";
 import AdminFinancing from "./pages/admin/AdminFinancing";
 import AdminSettings from "./pages/admin/AdminSettings";
 import OdooIntegration from "./pages/admin/OdooIntegration";
+import AdminBlog from "./pages/admin/AdminBlog";
+import AdminFAQs from "./pages/admin/AdminFAQs";
 
 const queryClient = new QueryClient();
 
@@ -107,6 +109,16 @@ const App = () => (
               <Route path="/admin/odoo-integration" element={
                 <ProtectedRoute requireAdmin>
                   <OdooIntegration />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/blog" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminBlog />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/faqs" element={
+                <ProtectedRoute requireAdmin>
+                  <AdminFAQs />
                 </ProtectedRoute>
               } />
               
